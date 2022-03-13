@@ -5,6 +5,7 @@ var first = 0;
 var mul = 0;
 var dec = 10;
 var res_test = 0;
+var op_count = 0;
 
 function ajouter(x) {
     if (res_test == 1) {
@@ -27,6 +28,8 @@ function ajouter(x) {
 
     val = Math.round(val * 100) / 100;
 
+    op_count = 0;
+
     document.getElementById('affichage').innerHTML = val;
 }
 
@@ -38,13 +41,18 @@ function operation(x) {
         op = x;
         mul = 0;
         dec = 10;
+        op_count += 1;
         return;
     }
+    op_count += 1;
     calcul(op);
     op = x;
 }
 
 function calcul(operation) {
+    if (op_count >= 2) {
+        return;
+    }
     switch (operation) {
         case '+':
             res = res + val;
